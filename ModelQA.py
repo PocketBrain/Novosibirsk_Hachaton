@@ -17,8 +17,8 @@ from transformers import GPT2Tokenizer
 data = pd.read_csv('QAdata')
 question = list(data.QUESTION)
 answer = list(data.ANSWER)
-sbert_model_name = 'sentence-transformers/all-MiniLM-L6-v2'
-sbert_model = SentenceTransformer(sbert_model_name)
+#sbert_model_name = 'sentence-transformers/all-MiniLM-L6-v2'
+sbert_model = SentenceTransformer("modelbert.pt")
 with open('model.pkl', 'rb') as f:
     sbert_embeddings = pkl.load(f)
 annoy_index = AnnoyIndex(len(sbert_embeddings[0]), 'angular')
@@ -29,8 +29,8 @@ sbert_embeddings = [torch.tensor(embedding) for embedding in sbert_embeddings]
 DEVICE = torch.device('cpu')
 modelgpt = torch.load('modelgpt1234.pt', map_location=torch.device('cpu'))
 modelgpt.eval()
-model_name_or_path = "tinkoff-ai/ruDialoGPT-medium"
-tokenizer = GPT2Tokenizer.from_pretrained(model_name_or_path)
+#model_name_or_path = "tinkoff-ai/ruDialoGPT-medium"
+tokenizer = GPT2Tokenizer.from_pretrained('modelgpt1234.pt')
 
 
 def generate_gpt_response(question, model, tokenizer):
