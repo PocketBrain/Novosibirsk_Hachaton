@@ -1,12 +1,13 @@
-В файле ModelQA.py содержиться интерфейся для создания и тестирования чат бота<br>
+В файле ModelQA.py содержиться интерфейс для создания и тестирования чат бота<br>
 <br>В файле Trainning.py код для дообучения модели и преобразования входных данных (Обучался в Google Colab на GPU)<br>
-<br>Файл Annoy_index необходимый для работы дообученной модели, необходимо скачать и вставить в файлы проекта, так как он превышает 100мб (git lfs не помог)
-(https://drive.google.com/file/d/1gufxOUqmlSdKEqWSMUzflGKvj8OTdo2e/view?usp=sharing)
+<br>Файл Annoy_index и веса GPT модели необходимые для работы дообученной модели, необходимо скачать и вставить в файлы проекта, так как они превышает 100мб (git lfs не помог)
+(https://drive.google.com/file/d/1gufxOUqmlSdKEqWSMUzflGKvj8OTdo2e/view?usp=sharing) - для ANNOY <br>
+(https://drive.google.com/uc?export=download&confirm=no_antivirus&id=1tdedCMoxcBLvx3OdVBnCFRDQZ4qeW_sY) для GPT
 ## Описание проекта
-Данный проект представляет собой чат-бота для ответа на вопросы пользователей МФЦ. Бот использует модель SentenceTransformer и построенный на ее основе индекс Annoy для быстрого поиска наиболее подходящего ответа на заданный вопрос.
+Данный проект представляет собой LLM чат-бота для обучения сотрудников компании Smart Consulting . Бот использует 2 модели SentenceTransformer и построенный на ее основе индекс Annoy для быстрого поиска наиболее подходящего ответа на заданный вопрос. А также ruDialoGPT-medim для формирования человеческих ответов. Такое решение помогает многократно улучшить масштабируемость и точность ответов
 
 ## Используемая модель
-В данном проекте используется модель SentenceTransformer с названием "all-MiniLM-L6-v2". Эта модель обучена на большом корпусе текстов и способна выделять семантические признаки из текстов, что позволяет использовать ее для задачи поиска наиболее подходящего ответа на заданный вопрос.
+В данном проекте используется связь моделей SentenceTransformer с названием "all-MiniLM-L6-v2" и "tinkoff-ai/ruDialoGPT-small". Эти модели обучены на большом корпусе текстов и способны выделять семантические признаки из текстов, что позволяет использовать ее для задачи поиска наиболее подходящего ответа на заданный вопрос.
 
 ## Используемая метрика
 Для измерения сходства между вопросами и ответами используется метрика cosine similarity, которая позволяет измерять косинус угла между векторами, полученными из текстов с помощью модели SentenceTransformer. Точность на данные их заданного датасета 0.95+.
@@ -20,9 +21,11 @@
 <br>transformers[torch]
 <br>sentence-transformers
 <br>AnnoyIndex
+<br>PyTorch
 <br>Pandas
 <br>from Sentence_transformers import SentenceTransformer, util
 <br>Pickle
 
 Обучение проводилось в Google Colab https://colab.research.google.com/drive/1K3xRY9uQWrjuLdSUF-B6nONKMar_m5YE?usp=sharing
-<br>Модель на HuggingFace в открытом доступе (https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+<br>Модели на HuggingFace в открытом доступе<br>1)(https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
+<br>2)(https://huggingface.co/tinkoff-ai/ruDialoGPT-small)
